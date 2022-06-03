@@ -1,0 +1,30 @@
+.hireTop {
+  /* background-color: blue; */
+  height: 200px;
+  display: flex;
+  align-items: center;
+  /* left: calc(37% - 238px / 2 - 256px); */
+  padding-left: 30px;
+  width: 80vw;
+}
+.content-box {
+  /* background-color: red; */
+  width: 80vw;
+  height: 100vh;
+}
+@media screen and (max-width: 480px) {
+  .content-box {
+    /* background-color: green; */
+    width: 100vw;
+    height: 150vh;
+  }
+  .hireTop {
+    /* background-color: yellow; */
+    height: 200px;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+  }
+}
+@media screen and (max-width: 480px) {
+}

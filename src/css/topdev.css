@@ -1,0 +1,81 @@
+.cards {
+  /* background-color: green; */
+  /* position: absolute; */
+  width: 338px;
+  height: 284px;
+  left: calc(37% - 238px / 2 - 256px);
+  top: 220px;
+
+  background: #ffff;
+  border-radius: 10px;
+}
+.cardContainer {
+  /* background-color: rebeccapurple; */
+  width: 80vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 29px;
+  justify-content: space-between;
+}
+@media screen and (max-width: 1700px) {
+  .cardContainer {
+    /* background-color: navy; */
+    width: 80vw;
+    height: 250vh;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 29px;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 870px) {
+  .cardContainer {
+    /* background-color: black; */
+    width: 100vw;
+    height: 250vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 680px) {
+  .cardContainer {
+    /* background-color: blue; */
+    width: 100vw;
+    height: 450vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cardContainer {
+    /* background-color: rebeccapurple; */
+    width: 100vw;
+    height: 650vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .cards {
+    /* background-color: green; */
+    /* position: absolute; */
+    width: 258px;
+    height: 174px;
+    left: calc(37% - 238px / 2 - 256px);
+    top: 220px;
+
+    /* background: #4f4f4f; */
+    border-radius: 10px;
+  }
+}
+
+/* .containerController {
+  background-color: burlywood;
+  width: 80vw;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+} */
