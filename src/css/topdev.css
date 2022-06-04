@@ -2,7 +2,7 @@
   /* background-color: green; */
   /* position: absolute; */
   width: 338px;
-  height: 284px;
+  height: 304px;
   left: calc(37% - 238px / 2 - 256px);
   top: 220px;
 
@@ -12,7 +12,7 @@
 .cardContainer {
   /* background-color: rebeccapurple; */
   width: 80vw;
-  height: 100vh;
+  height: 380vh;
   display: flex;
   flex-wrap: wrap;
   padding-left: 29px;
@@ -22,7 +22,7 @@
   .cardContainer {
     /* background-color: navy; */
     width: 80vw;
-    height: 250vh;
+    height: 650vh;
     display: flex;
     flex-wrap: wrap;
     padding-left: 29px;
@@ -33,7 +33,7 @@
   .cardContainer {
     /* background-color: black; */
     width: 100vw;
-    height: 250vh;
+    height: 650vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -43,7 +43,7 @@
   .cardContainer {
     /* background-color: blue; */
     width: 100vw;
-    height: 450vh;
+    height: 1200vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -52,9 +52,9 @@
 
 @media screen and (max-width: 480px) {
   .cardContainer {
-    /* background-color: rebeccapurple; */
+    /* background-color: burlywood; */
     width: 100vw;
-    height: 650vh;
+    height: 1110vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -71,11 +71,100 @@
     border-radius: 10px;
   }
 }
-
-/* .containerController {
-  background-color: burlywood;
-  width: 80vw;
-  height: 400px;
+.foot {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  /* background-color: red; */
+  height: 300px;
+}
+.selectbar {
+  width: 250px;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flagimg {
+  margin-left: 10px;
+}
+.flagimg img {
+  width: 30px;
+  height: 20px;
+}
+.dropdown {
+  margin-right: 10px;
+}
+.flagname {
+  margin-right: 60px;
+  font-size: large;
+}
+.selectbar2 {
+  width: 250px;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  border: 1px solid gray;
+  align-items: center;
+  justify-content: space-between;
+  /* position: absolute; */
+}
+.selectbar3 {
+  width: 250px;
+  height: 40px;
+  /* background-color: green; */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* position: absolute; */
+}
+.selectbar3:hover {
+  background-color: rgb(214, 209, 209);
+}
+.selectopt {
+  width: 250px;
+  height: 15rem;
+  background-color: rgb(225, 225, 225);
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+.option1 {
+  background-color: gray;
+}
+.flagname2 {
+  margin-right: 60px;
+  font-size: large;
+}
+.flagimg2 {
+  margin-left: 10px;
+}
+.flagimg2 img {
+  width: 30px;
+  height: 20px;
+}
+.dropdown2 {
+  margin-right: 10px;
+}
+.flagname3 {
+}
+
+.flagimg3 {
+  margin-left: 10px;
+}
+.flagimg3 img {
+  width: 30px;
+  height: 20px;
+}
+.dropdown3 {
+  margin-right: 10px;
+}
+/* .flagname3 {
+  margin-right: 120px;
 } */

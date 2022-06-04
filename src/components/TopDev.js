@@ -1,381 +1,211 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../css/topdev.css";
+import { listofcurrency } from "../redux/actions/currencyactions";
+import { listofdev } from "../redux/actions/developersaction";
+import Loader from "./Loader";
 const TopDev = () => {
+  const [devs, setDevs] = useState([]);
+  const [currenc, setCurrency] = useState([]);
+  const [netcurrenc, setnetCurrency] = useState([]);
+  const [activecurrenc, setActiveCurrency] = useState({
+    id: "",
+    name: "naira",
+    flag: "https://cdn.britannica.com/68/5068-004-72A3F250/Flag-Nigeria.jpg",
+    symbol: "N",
+    rate: 1,
+  });
+  const devLists = useSelector((state) => state.devLists);
+  const { loading, developers, error } = devLists;
+
+  const currencyLists = useSelector((state) => state.currencyLists);
+  console.log(currencyLists);
+  // const { loading2, currency, error2 } = devLists;
+  const [dropdown, setDropdown] = useState(false);
+  const [openDropdow, setOpendropdow] = useState(false);
+  console.log(devLists);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(listofdev(setDevs));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(listofcurrency(setCurrency, setnetCurrency));
+  }, [dispatch]);
+  const openDropdown = () => {
+    setDropdown(true);
+    setOpendropdow(true);
+  };
+  const closeDropdown = () => {
+    setDropdown(false);
+    setOpendropdow(false);
+  };
+  const setThe = (id, name, flag_url, symbol) => {
+    const rate = netcurrenc.filter(
+      (cd) => id == cd.buying_currency_id && cd.currency_id == 1
+    );
+
+    console.log("yeah", rate[0]);
+    setActiveCurrency({
+      id: id,
+      name: name,
+      flag: flag_url,
+      symbol: symbol,
+      rate: rate[0].net_rate,
+    });
+  };
+  console.log(activecurrenc);
   return (
     <div>
       <section className="containerController">
         <div className="cardContainer">
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
+          {loading ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <>
+              {" "}
+              {devs.map((dev) => {
+                return (
+                  <>
+                    <div className="cards">
+                      <img
+                        src={dev._source.service_photo}
+                        alt=""
+                        style={{
+                          width: "337px",
+                          objectFit: "cover",
+                          height: "180px",
+                          position: "absolute",
+                          borderRadius: "20px",
+                        }}
+                      />
+                      <img
+                        src={dev._source.avatar}
+                        alt=""
+                        style={{
+                          width: "60px",
+                          objectFit: "cover",
+                          height: "60px",
+                          position: "relative",
+                          marginTop: "140px",
+                          marginLeft: "20px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                      <div>
+                        <p>{dev._source.display_name}</p>
+                        <p>
+                          {activecurrenc.symbol}
+                          {(
+                            parseInt(dev._source.starting_from) *
+                            activecurrenc.rate
+                          ).toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
+            </>
+          )}
+        </div>
+        <div className="foot">
+          <h5>© 2022 DevHire</h5>
+          {/* <select id="gender">
+            <option>male</option>
+            <option>female</option>
+            <option>others</option>
+          </select> */}
+          <div>
+            {!openDropdow && (
+              <>
+                {" "}
+                <button onClick={openDropdown} className="selectbar">
+                  <div className="flagimg">
+                    <img src={activecurrenc.flag} alt="" />
+                  </div>
+                  <div className="flagname">
+                    <h6>{activecurrenc.name}</h6>
+                  </div>
+                  <div className="dropdown">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-caret-down-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                    </svg>
+                  </div>
+                </button>
+              </>
+            )}
+            {openDropdow && (
+              <>
+                <button onClick={closeDropdown} className="selectbar2">
+                  <div className="flagimg2">
+                    <img src={activecurrenc.flag} alt="" />
+                  </div>
+                  <div className="flagname2">
+                    <h6>{activecurrenc.name}</h6>
+                  </div>
+                  <div className="dropdown2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-caret-down-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                    </svg>
+                  </div>
+                </button>
+              </>
+            )}
+
+            {dropdown && (
+              <>
+                {" "}
+                <div className="selectopt">
+                  {currenc.map((curr) => {
+                    return (
+                      <>
+                        <>
+                          <div
+                            onClick={() => {
+                              setThe(
+                                curr.id,
+                                curr.name,
+                                curr.flag_url,
+                                curr.symbol
+                                // curr.net_conversions.net_rate
+                              );
+                              setDropdown(false);
+                            }}
+                            className="selectbar3"
+                          >
+                            <div className="flagimg2">
+                              <img src={curr.flag_url} alt="" />
+                            </div>
+                            <div className="flagname2">
+                              <h6>{curr.name}</h6>
+                            </div>
+                          </div>
+                        </>
+                      </>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Y29tcHV0ZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1547082299-de196ea013d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          <div className="cards">
-            <img
-              src="https://images.unsplash.com/photo-1654196877513-57c5d9190e50?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "337px",
-                objectFit: "cover",
-                height: "180px",
-                position: "absolute",
-                borderRadius: "20px",
-              }}
-            />
-            <img
-              src="https://images.unsplash.com/photo-1643732994192-03856731da2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-              alt=""
-              style={{
-                width: "60px",
-                objectFit: "cover",
-                height: "60px",
-                position: "relative",
-                marginTop: "140px",
-                marginLeft: "20px",
-                borderRadius: "50%",
-              }}
-            />
-            <div>
-              <p>power</p>
-              <p>₦30,000</p>
-            </div>
-          </div>
-          {/* <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div>
-          <div className="cards">power</div> */}
+          {/* <h1>{activecurrenc.id}</h1> */}
         </div>
       </section>
     </div>
