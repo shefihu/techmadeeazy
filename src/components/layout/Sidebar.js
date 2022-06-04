@@ -3,7 +3,7 @@ import logo from "./../../assets/images/Logo.png";
 import "../../css/sidebar.css";
 import { CSSTransition } from "react-transition-group";
 const Sidebar = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   return (
     <div>
       {/* <CSSTransition in={show} timeout={400} classNames="display" unmountOnExit> */}
