@@ -1,15 +1,17 @@
-.cards {
+.favcards {
   /* background-color: green; */
   /* position: absolute; */
   width: 338px;
   height: 304px;
   left: calc(37% - 238px / 2 - 256px);
   top: 220px;
-  margin-top: 30px;
+
   background: #ffff;
   border-radius: 10px;
+  margin-top: 30px;
 }
-.cardContainer {
+.favcardContainer {
+  background-color: rebeccapurple;
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,9 +20,9 @@
   justify-content: space-between;
 }
 @media screen and (max-width: 1700px) {
-  .cardContainer {
+  .favcardContainer {
     /* background-color: navy; */
-    width: 80vw;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -29,9 +31,9 @@
   }
 }
 @media screen and (max-width: 870px) {
-  .cardContainer {
+  .favcardContainer {
     /* background-color: black; */
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -39,9 +41,9 @@
   }
 }
 @media screen and (max-width: 680px) {
-  .cardContainer {
+  .favcardContainer {
     /* background-color: blue; */
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -50,15 +52,15 @@
 }
 
 @media screen and (max-width: 480px) {
-  .cardContainer {
-    background-color: burlywood;
+  .favcardContainer {
+    /* background-color: burlywood; */
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  .cards {
+  .favcards {
     /* background-color: green; */
     /* position: absolute; */
     margin-top: 160px;
@@ -70,25 +72,16 @@
     /* background: #4f4f4f; */
     border-radius: 10px;
   }
-  .foot {
-    display: flex;
-    justify-content: space-between;
-    background-color: black;
-    width: 400px;
-    height: 100px;
-    margin-top: 130px;
-  }
 }
-.foot {
+.favfoot {
   display: flex;
   justify-content: space-between;
-  /* background-color: red; */
-  /* width: 600px; */
+  /* background-color: red;s */
   height: 100px;
   margin-top: 130px;
 }
-.selectbar {
-  width: 230px;
+.favselectbar {
+  width: 250px;
   height: 40px;
   background-color: white;
   border-radius: 5px;
@@ -98,22 +91,22 @@
   justify-content: space-between;
 }
 
-.flagimg {
+.favflagimg {
   margin-left: 10px;
 }
-.flagimg img {
+.favflagimg img {
   width: 30px;
   height: 20px;
 }
-.dropdown {
+.favdropdown {
   margin-right: 10px;
 }
-.flagname {
+.favflagname {
   margin-right: 60px;
   font-size: large;
 }
-.selectbar2 {
-  width: 230px;
+.favselectbar2 {
+  width: 250px;
   height: 40px;
   background-color: white;
   border-radius: 5px;
@@ -123,8 +116,8 @@
   justify-content: space-between;
   /* position: absolute; */
 }
-.selectbar3 {
-  width: 230px;
+.favselectbar3 {
+  width: 250px;
   height: 40px;
   /* background-color: green; */
   border-radius: 5px;
@@ -134,45 +127,45 @@
 
   /* position: absolute; */
 }
-.selectbar3:hover {
+.favselectbar3:hover {
   background-color: rgb(214, 209, 209);
 }
-.selectopt {
-  width: 230px;
+.favselectopt {
+  width: 250px;
   height: 15rem;
   background-color: rgb(225, 225, 225);
   overflow: hidden;
   overflow-y: scroll;
   overflow-x: scroll;
 }
-.option1 {
+.favoption1 {
   background-color: gray;
 }
-.flagname2 {
+.favflagname2 {
   margin-right: 60px;
   font-size: large;
 }
-.flagimg2 {
+.favflagimg2 {
   margin-left: 10px;
 }
-.flagimg2 img {
+.favflagimg2 img {
   width: 30px;
   height: 20px;
 }
-.dropdown2 {
+.favdropdown2 {
   margin-right: 10px;
 }
-.flagname3 {
+.favflagname3 {
 }
 
-.flagimg3 {
+.favflagimg3 {
   margin-left: 10px;
 }
-.flagimg3 img {
+.favflagimg3 img {
   width: 30px;
   height: 20px;
 }
-.dropdown3 {
+.favdropdown3 {
   margin-right: 10px;
 }
 /* .flagname3 {

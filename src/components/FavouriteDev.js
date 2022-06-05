@@ -4,7 +4,7 @@ import { listofcurrency } from "../redux/actions/currencyactions";
 import { listofdev } from "../redux/actions/developersaction";
 import Cookies from "js-cookie";
 import Loader from "./Loader";
-import "../css/topdev.css";
+import "../css/favdev.css";
 const FavouriteDev = () => {
   const [devs, setDevs] = useState([]);
   const [currenc, setCurrency] = useState([]);
@@ -19,7 +19,13 @@ const FavouriteDev = () => {
   });
   const devLists = useSelector((state) => state.devLists);
   const { loading, developers, error } = devLists;
-  const darl = JSON.parse(Cookies.get("favourites"));
+  // const darl = JSON.parse(Cookies.get("favourites"));
+  const darl = {
+    favourites: Cookies.get("favourites")
+      ? JSON.parse(Cookies.get("favourites"))
+      : [],
+  };
+  console.log("dhdh", darl.favourites);
   const currencyLists = useSelector((state) => state.currencyLists);
   // console.log(currencyLists);
   // const { loading2, currency, error2 } = devLists;
@@ -54,14 +60,14 @@ const FavouriteDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  console.log("yeah", darl.id);
+  console.log("yeah", darl);
   // setFavorites(darl);
   // console.log(favorites);
   return (
     <div>
       {" "}
-      <section className="containerController">
-        <div className="cardContainer">
+      <section className="favcontainerController">
+        <div className="favcardContainer">
           {loading ? (
             <>
               <Loader />
@@ -69,12 +75,12 @@ const FavouriteDev = () => {
           ) : (
             <>
               {" "}
-              {devs.map((dev) => {
+              {darl.favourites.map((dev) => {
                 return (
                   <>
-                    <div className="cards">
+                    <div className="favcards">
                       <img
-                        src={dev._source.service_photo}
+                        src={dev.photo}
                         alt=""
                         style={{
                           width: "337px",
@@ -85,7 +91,7 @@ const FavouriteDev = () => {
                         }}
                       />
                       <img
-                        src={dev._source.avatar}
+                        src={dev.avatar}
                         alt=""
                         style={{
                           width: "60px",
@@ -98,13 +104,10 @@ const FavouriteDev = () => {
                         }}
                       />
                       <div>
-                        <p>{dev._source.display_name}</p>
+                        <p>{dev.name}</p>
                         <p>
-                          {activecurrenc.symbol}
-                          {(
-                            parseInt(dev._source.starting_from) *
-                            activecurrenc.rate
-                          ).toFixed(2)}
+                          {dev.symbol}
+                          {(parseInt(dev.starting) * dev.rate).toFixed(2)}
                         </p>
                       </div>
                     </div>
@@ -114,7 +117,7 @@ const FavouriteDev = () => {
             </>
           )}
         </div>
-        <div className="foot">
+        <div className="favfoot">
           <h5>© 2022 DevHire</h5>
           {/* <select id="gender">
             <option>male</option>
@@ -125,14 +128,14 @@ const FavouriteDev = () => {
             {!openDropdow && (
               <>
                 {" "}
-                <button onClick={openDropdown} className="selectbar">
-                  <div className="flagimg">
+                <button onClick={openDropdown} className="favselectbar">
+                  <div className="favflagimg">
                     <img src={activecurrenc.flag} alt="" />
                   </div>
-                  <div className="flagname">
+                  <div className="favflagname">
                     <h6>{activecurrenc.name}</h6>
                   </div>
-                  <div className="dropdown">
+                  <div className="favdropdown">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -149,14 +152,14 @@ const FavouriteDev = () => {
             )}
             {openDropdow && (
               <>
-                <button onClick={closeDropdown} className="selectbar2">
-                  <div className="flagimg2">
+                <button onClick={closeDropdown} className="favselectbar2">
+                  <div className="favflagimg2">
                     <img src={activecurrenc.flag} alt="" />
                   </div>
-                  <div className="flagname2">
+                  <div className="favflagname2">
                     <h6>{activecurrenc.name}</h6>
                   </div>
-                  <div className="dropdown2">
+                  <div className="favdropdown2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -175,7 +178,7 @@ const FavouriteDev = () => {
             {dropdown && (
               <>
                 {" "}
-                <div className="selectopt">
+                <div className="favselectopt">
                   {currenc.map((curr) => {
                     return (
                       <>
@@ -191,12 +194,12 @@ const FavouriteDev = () => {
                               );
                               setDropdown(false);
                             }}
-                            className="selectbar3"
+                            className="favselectbar3"
                           >
-                            <div className="flagimg2">
+                            <div className="favflagimg2">
                               <img src={curr.flag_url} alt="" />
                             </div>
-                            <div className="flagname2">
+                            <div className="favflagname2">
                               <h6>{curr.name}</h6>
                             </div>
                           </div>

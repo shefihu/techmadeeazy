@@ -10,18 +10,11 @@ const TopDev = () => {
   const [devs, setDevs] = useState([]);
   const [currenc, setCurrency] = useState([]);
   const [netcurrenc, setnetCurrency] = useState([]);
-  const [favorites, setFavorites] = useState([
-    {
-      id: "",
-      photo: "",
-      avatar: "",
-      name: "",
-    },
-  ]);
+  const [favorites, setFavorites] = useState([]);
 
   const [activecurrenc, setActiveCurrency] = useState({
     id: "",
-    name: "naira",
+    name: "Naira",
     flag: "https://cdn.britannica.com/68/5068-004-72A3F250/Flag-Nigeria.jpg",
     symbol: "N",
     rate: 1,
@@ -64,21 +57,40 @@ const TopDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  const addFav = (_id, display_name, service_photo, avatar) => {
+  const addFav = (
+    _id,
+    display_name,
+    service_photo,
+    avatar,
+    starting_from,
+    symbol,
+    rate
+  ) => {
     const value = {
       id: _id,
       name: display_name,
       photo: service_photo,
       avatar: avatar,
+      starting: starting_from,
+      symbol: symbol,
+      rate: rate,
     };
     // const newValue = [value];
-    // const newArray = value.push(favorites);
     // const newArray = newValue.push(value);
+
     setFavorites((prevState) => {
-      return [...prevState, value];
+      console.log("jj", prevState);
+      console.log("hhh", value);
+      prevState.push(value);
+      // return [...prevState, value];
+      // const newValue = [...prevState, value];
+      // console.log("jj", prevState);
+      // console.log("hhh", value);
+      console.log(prevState);
+      Cookies.set("favourites", JSON.stringify(prevState), { expires: 7 });
+      return prevState;
     });
-    Cookies.set("favourites", JSON.stringify(favorites), { expires: 7 });
-    console.log("yeah", favorites);
+    // console.log("yeah", newValue);
   };
   console.log(activecurrenc);
   return (
@@ -101,7 +113,10 @@ const TopDev = () => {
                           dev._id,
                           dev._source.display_name,
                           dev._source.service_photo,
-                          dev._source.avatar
+                          dev._source.avatar,
+                          dev._source.starting_from,
+                          activecurrenc.symbol,
+                          activecurrenc.rate
                         );
                       }}
                       className="cards"
@@ -117,7 +132,7 @@ const TopDev = () => {
                           borderRadius: "20px",
                         }}
                       />
-              
+
                       <img
                         src={dev._source.avatar}
                         alt=""
