@@ -117,20 +117,7 @@ const TopDev = () => {
                           borderRadius: "20px",
                         }}
                       />
-                      <img
-                        src="https://cdn.britannica.com/68/5068-004-72A3F250/Flag-Nigeria.jpg"
-                        alt=""
-                        style={{
-                          width: "40px",
-                          objectFit: "cover",
-                          height: "40px",
-                          position: "relative",
-                          marginBottom: "150px",
-                          left: "85%",
-
-                          borderRadius: "10px",
-                        }}
-                      />
+              
                       <img
                         src={dev._source.avatar}
                         alt=""
