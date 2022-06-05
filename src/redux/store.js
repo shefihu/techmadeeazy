@@ -1,9 +1,10 @@
 import { data } from "autoprefixer";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 import thunk from "redux-thunk";
 import { currencyListReducer } from "./reducers/currencyreducer";
 import { devListReducer } from "./reducers/devReducers";
+import { favouriteReducer } from "./reducers/favReducers";
 // import { cartReducer } from "./reducers/cartReducers";
 // import {
 //   maleProductListReducer,
@@ -46,9 +47,17 @@ import { devListReducer } from "./reducers/devReducers";
 //       : null,
 //   },
 // };
+const initialstate = {
+  favLists: {
+    favItems: Cookies.get("favourites")
+      ? JSON.parse(Cookies.get("favourites"))
+      : [],
+  },
+};
 const reducer = combineReducers({
   devLists: devListReducer,
   currencyLists: currencyListReducer,
+  favLists: favouriteReducer,
   //   userSignin: userSigninReducer,
   //   adminSignin: adminSigninReducer,
   //   userRegister: userRegisternReducer,
@@ -68,7 +77,7 @@ const reducer = combineReducers({
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducer,
-  //   initialState,
+  initialstate,
   composeEnhancer(applyMiddleware(thunk))
 );
 export default store;

@@ -6,11 +6,13 @@ import "../css/topdev.css";
 import { listofcurrency } from "../redux/actions/currencyactions";
 import { listofdev } from "../redux/actions/developersaction";
 import Loader from "./Loader";
+import { addToFav } from "../redux/actions/addFav";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TopDev = () => {
   const [devs, setDevs] = useState([]);
   const [currenc, setCurrency] = useState([]);
   const [netcurrenc, setnetCurrency] = useState([]);
-  const [favorites, setFavorites] = useState([]);
 
   const [activecurrenc, setActiveCurrency] = useState({
     id: "",
@@ -20,7 +22,7 @@ const TopDev = () => {
     rate: 1,
   });
   const devLists = useSelector((state) => state.devLists);
-  const { loading, developers, error } = devLists;
+  const { loading } = devLists;
 
   const currencyLists = useSelector((state) => state.currencyLists);
   console.log(currencyLists);
@@ -57,44 +59,17 @@ const TopDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  const addFav = (
-    _id,
-    display_name,
-    service_photo,
-    avatar,
-    starting_from,
-    symbol,
-    rate
-  ) => {
-    const value = {
-      id: _id,
-      name: display_name,
-      photo: service_photo,
-      avatar: avatar,
-      starting: starting_from,
-      symbol: symbol,
-      rate: rate,
-    };
-    // const newValue = [value];
-    // const newArray = newValue.push(value);
+  const addFav = (_id, display_name, service_photo, avatar, starting_from) => {
+    toast.success("Added to Favourites");
 
-    setFavorites((prevState) => {
-      console.log("jj", prevState);
-      console.log("hhh", value);
-      prevState.push(value);
-      // return [...prevState, value];
-      // const newValue = [...prevState, value];
-      // console.log("jj", prevState);
-      // console.log("hhh", value);
-      console.log(prevState);
-      Cookies.set("favourites", JSON.stringify(prevState), { expires: 7 });
-      return prevState;
-    });
-    // console.log("yeah", newValue);
+    dispatch(addToFav(_id, display_name, service_photo, avatar, starting_from));
   };
+  // console.log("yeah", newValue);
+
   console.log(activecurrenc);
   return (
     <div>
+      <ToastContainer />
       <section className="containerController">
         <div className="cardContainer">
           {loading ? (
@@ -114,9 +89,7 @@ const TopDev = () => {
                           dev._source.display_name,
                           dev._source.service_photo,
                           dev._source.avatar,
-                          dev._source.starting_from,
-                          activecurrenc.symbol,
-                          activecurrenc.rate
+                          dev._source.starting_from
                         );
                       }}
                       className="cards"
@@ -211,10 +184,10 @@ const TopDev = () => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-caret-down-fill"
+                      class="bi bi-caret-up-fill"
                       viewBox="0 0 16 16"
                     >
-                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                      <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
                     </svg>
                   </div>
                 </button>

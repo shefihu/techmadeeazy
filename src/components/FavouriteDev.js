@@ -12,7 +12,7 @@ const FavouriteDev = () => {
   const [netcurrenc, setnetCurrency] = useState([]);
   const [activecurrenc, setActiveCurrency] = useState({
     id: "",
-    name: "naira",
+    name: "Naira",
     flag: "https://cdn.britannica.com/68/5068-004-72A3F250/Flag-Nigeria.jpg",
     symbol: "N",
     rate: 1,
@@ -20,13 +20,13 @@ const FavouriteDev = () => {
   const devLists = useSelector((state) => state.devLists);
   const { loading, developers, error } = devLists;
   // const darl = JSON.parse(Cookies.get("favourites"));
-  const darl = {
-    favourites: Cookies.get("favourites")
-      ? JSON.parse(Cookies.get("favourites"))
-      : [],
-  };
-  console.log("dhdh", darl.favourites);
+
   const currencyLists = useSelector((state) => state.currencyLists);
+  const favourites = useSelector((state) => state.favLists.favItems);
+
+  useEffect(() => {
+    setFavorites(favourites);
+  }, [favourites]);
   // console.log(currencyLists);
   // const { loading2, currency, error2 } = devLists;
   const [dropdown, setDropdown] = useState(false);
@@ -60,7 +60,7 @@ const FavouriteDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  console.log("yeah", darl);
+
   // setFavorites(darl);
   // console.log(favorites);
   return (
@@ -74,144 +74,156 @@ const FavouriteDev = () => {
             </>
           ) : (
             <>
-              {" "}
-              {darl.favourites.map((dev) => {
-                return (
-                  <>
-                    <div className="favcards">
-                      <img
-                        src={dev.photo}
-                        alt=""
-                        style={{
-                          width: "337px",
-                          objectFit: "cover",
-                          height: "180px",
-                          position: "absolute",
-                          borderRadius: "20px",
-                        }}
-                      />
-                      <img
-                        src={dev.avatar}
-                        alt=""
-                        style={{
-                          width: "60px",
-                          objectFit: "cover",
-                          height: "60px",
-                          position: "relative",
-                          marginTop: "140px",
-                          marginLeft: "20px",
-                          borderRadius: "50%",
-                        }}
-                      />
-                      <div>
-                        <p>{dev.name}</p>
-                        <p>
-                          {dev.symbol}
-                          {(parseInt(dev.starting) * dev.rate).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
-            </>
-          )}
-        </div>
-        <div className="favfoot">
-          <h5>© 2022 DevHire</h5>
-          {/* <select id="gender">
-            <option>male</option>
-            <option>female</option>
-            <option>others</option>
-          </select> */}
-          <div>
-            {!openDropdow && (
-              <>
-                {" "}
-                <button onClick={openDropdown} className="favselectbar">
-                  <div className="favflagimg">
-                    <img src={activecurrenc.flag} alt="" />
-                  </div>
-                  <div className="favflagname">
-                    <h6>{activecurrenc.name}</h6>
-                  </div>
-                  <div className="favdropdown">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-caret-down-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg>
-                  </div>
-                </button>
-              </>
-            )}
-            {openDropdow && (
-              <>
-                <button onClick={closeDropdown} className="favselectbar2">
-                  <div className="favflagimg2">
-                    <img src={activecurrenc.flag} alt="" />
-                  </div>
-                  <div className="favflagname2">
-                    <h6>{activecurrenc.name}</h6>
-                  </div>
-                  <div className="favdropdown2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-caret-down-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                    </svg>
-                  </div>
-                </button>
-              </>
-            )}
-
-            {dropdown && (
-              <>
-                {" "}
-                <div className="favselectopt">
-                  {currenc.map((curr) => {
+              {favorites.length === 0 ? (
+                <>
+                  <h1>No favorite developer yet</h1>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {favorites.map((dev) => {
                     return (
                       <>
-                        <>
-                          <div
-                            onClick={() => {
-                              setThe(
-                                curr.id,
-                                curr.name,
-                                curr.flag_url,
-                                curr.symbol
-                                // curr.net_conversions.net_rate
-                              );
-                              setDropdown(false);
+                        <div className="favcards">
+                          <img
+                            src={dev.photo}
+                            alt=""
+                            style={{
+                              width: "337px",
+                              objectFit: "cover",
+                              height: "180px",
+                              position: "absolute",
+                              borderRadius: "20px",
                             }}
-                            className="favselectbar3"
-                          >
-                            <div className="favflagimg2">
-                              <img src={curr.flag_url} alt="" />
-                            </div>
-                            <div className="favflagname2">
-                              <h6>{curr.name}</h6>
-                            </div>
+                          />
+                          <img
+                            src={dev.avatar}
+                            alt=""
+                            style={{
+                              width: "60px",
+                              objectFit: "cover",
+                              height: "60px",
+                              position: "relative",
+                              marginTop: "140px",
+                              marginLeft: "20px",
+                              borderRadius: "50%",
+                            }}
+                          />
+                          <div>
+                            <p>{dev.name}</p>
+                            <p>
+                              {activecurrenc.symbol}
+                              {/* {activecurrenc.symbol} */}
+                              {(
+                                parseInt(dev.starting) * activecurrenc.rate
+                              ).toFixed(2)}
+                            </p>
                           </div>
-                        </>
+                        </div>
                       </>
                     );
                   })}
-                </div>
-              </>
-            )}
-          </div>
-          {/* <h1>{activecurrenc.id}</h1> */}
+                  <div className="favfoot">
+                    <h5>© 2022 DevHire</h5>
+
+                    <div>
+                      {!openDropdow && (
+                        <>
+                          {" "}
+                          <button
+                            onClick={openDropdown}
+                            className="favselectbar"
+                          >
+                            <div className="favflagimg">
+                              <img src={activecurrenc.flag} alt="" />
+                            </div>
+                            <div className="favflagname">
+                              <h6>{activecurrenc.name}</h6>
+                            </div>
+                            <div className="favdropdown">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-caret-down-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                              </svg>
+                            </div>
+                          </button>
+                        </>
+                      )}
+                      {openDropdow && (
+                        <>
+                          <button
+                            onClick={closeDropdown}
+                            className="favselectbar2"
+                          >
+                            <div className="favflagimg2">
+                              <img src={activecurrenc.flag} alt="" />
+                            </div>
+                            <div className="favflagname2">
+                              <h6>{activecurrenc.name}</h6>
+                            </div>
+                            <div className="favdropdown2">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi bi-caret-up-fill"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                              </svg>
+                            </div>
+                          </button>
+                        </>
+                      )}
+
+                      {dropdown && (
+                        <>
+                          {" "}
+                          <div className="favselectopt">
+                            {currenc.map((curr) => {
+                              return (
+                                <>
+                                  <>
+                                    <div
+                                      onClick={() => {
+                                        setThe(
+                                          curr.id,
+                                          curr.name,
+                                          curr.flag_url,
+                                          curr.symbol
+                                          // curr.net_conversions.net_rate
+                                        );
+                                        setDropdown(false);
+                                      }}
+                                      className="favselectbar3"
+                                    >
+                                      <div className="favflagimg2">
+                                        <img src={curr.flag_url} alt="" />
+                                      </div>
+                                      <div className="favflagname2">
+                                        <h6>{curr.name}</h6>
+                                      </div>
+                                    </div>
+                                  </>
+                                </>
+                              );
+                            })}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </>
+              )}{" "}
+            </>
+          )}
         </div>
       </section>
     </div>
