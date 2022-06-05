@@ -21,3 +21,4 @@ export const listofdev = (setDevs) => async (dispatch) => {
     dispatch({ type: DEV_LIST_FAILURE, payload: error.message });
   }
 };
+export const favouritedev = () => async (dispatch) => {};

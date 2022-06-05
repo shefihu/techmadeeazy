@@ -1,24 +1,15 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
-import "../css/topdev.css";
 import { listofcurrency } from "../redux/actions/currencyactions";
 import { listofdev } from "../redux/actions/developersaction";
+import Cookies from "js-cookie";
 import Loader from "./Loader";
-const TopDev = () => {
+import "../css/topdev.css";
+const FavouriteDev = () => {
   const [devs, setDevs] = useState([]);
   const [currenc, setCurrency] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [netcurrenc, setnetCurrency] = useState([]);
-  const [favorites, setFavorites] = useState([
-    {
-      id: "",
-      photo: "",
-      avatar: "",
-      name: "",
-    },
-  ]);
-
   const [activecurrenc, setActiveCurrency] = useState({
     id: "",
     name: "naira",
@@ -28,13 +19,13 @@ const TopDev = () => {
   });
   const devLists = useSelector((state) => state.devLists);
   const { loading, developers, error } = devLists;
-
+  const darl = JSON.parse(Cookies.get("favourites"));
   const currencyLists = useSelector((state) => state.currencyLists);
-  console.log(currencyLists);
+  // console.log(currencyLists);
   // const { loading2, currency, error2 } = devLists;
   const [dropdown, setDropdown] = useState(false);
   const [openDropdow, setOpendropdow] = useState(false);
-  console.log(devLists);
+  // console.log(devLists);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listofdev(setDevs));
@@ -55,7 +46,6 @@ const TopDev = () => {
       (cd) => id == cd.buying_currency_id && cd.currency_id == 1
     );
 
-    console.log("yeah", rate[0]);
     setActiveCurrency({
       id: id,
       name: name,
@@ -64,25 +54,12 @@ const TopDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  const addFav = (_id, display_name, service_photo, avatar) => {
-    const value = {
-      id: _id,
-      name: display_name,
-      photo: service_photo,
-      avatar: avatar,
-    };
-    // const newValue = [value];
-    // const newArray = value.push(favorites);
-    // const newArray = newValue.push(value);
-    setFavorites((prevState) => {
-      return [...prevState, value];
-    });
-    Cookies.set("favourites", JSON.stringify(favorites), { expires: 7 });
-    console.log("yeah", favorites);
-  };
-  console.log(activecurrenc);
+  console.log("yeah", darl.id);
+  // setFavorites(darl);
+  // console.log(favorites);
   return (
     <div>
+      {" "}
       <section className="containerController">
         <div className="cardContainer">
           {loading ? (
@@ -95,17 +72,7 @@ const TopDev = () => {
               {devs.map((dev) => {
                 return (
                   <>
-                    <div
-                      onClick={() => {
-                        addFav(
-                          dev._id,
-                          dev._source.display_name,
-                          dev._source.service_photo,
-                          dev._source.avatar
-                        );
-                      }}
-                      className="cards"
-                    >
+                    <div className="cards">
                       <img
                         src={dev._source.service_photo}
                         alt=""
@@ -115,20 +82,6 @@ const TopDev = () => {
                           height: "180px",
                           position: "absolute",
                           borderRadius: "20px",
-                        }}
-                      />
-                      <img
-                        src="https://cdn.britannica.com/68/5068-004-72A3F250/Flag-Nigeria.jpg"
-                        alt=""
-                        style={{
-                          width: "40px",
-                          objectFit: "cover",
-                          height: "40px",
-                          position: "relative",
-                          marginBottom: "150px",
-                          left: "85%",
-
-                          borderRadius: "10px",
                         }}
                       />
                       <img
@@ -262,4 +215,4 @@ const TopDev = () => {
   );
 };
 
-export default TopDev;
+export default FavouriteDev;

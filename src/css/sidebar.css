@@ -3,7 +3,7 @@
   /* background-color: red; */
   max-width: 250px;
   border-right: 1px solid #d9dbe9;
-  height: 250vh;
+  height: 220vh;
 }
 .logo {
   padding-left: 40px;
@@ -92,4 +92,13 @@ li {
     /* background-color: #1d9bf0; */
     height: 650vh;
   }
+}
+a.active {
+  text-decoration: none;
+  font-weight: bolder;
+  color: #1d9bf0;
+}
+a {
+  color: #7c7e8a;
+  text-decoration: none;
 }
