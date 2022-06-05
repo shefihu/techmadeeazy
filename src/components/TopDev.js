@@ -90,7 +90,6 @@ const TopDev = () => {
             </>
           ) : (
             <>
-              {" "}
               {devs.map((dev, index) => {
                 return (
                   <>
@@ -184,6 +183,7 @@ const TopDev = () => {
                           <p>{dev._source.display_name}</p>
                           <p>
                             {activecurrenc.symbol}
+
                             {(
                               parseInt(dev._source.starting_from) *
                               activecurrenc.rate

@@ -1,23 +1,23 @@
 .hireTop {
   display: flex;
   align-items: center;
-  height: 200px;
+  margin-top: 7rem;
   padding-left: 30px;
   width: 80vw;
 }
 .content-box {
   width: 80vw;
-  height: 100vh;
+  height: 100%;
 }
 @media screen and (max-width: 480px) {
   .content-box {
     width: 100vw;
-    height: 150vh;
+    height: 100%;
   }
   .hireTop {
     display: flex;
-    margin-top: 90px;
-    align-items: center;
+    margin-top: 120px;
+
     width: 100vw;
   }
 }

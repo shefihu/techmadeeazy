@@ -15,9 +15,11 @@
   padding-left: 29px;
   justify-content: space-between;
 }
+
 .cardInfo {
   justify-content: space-between;
   display: flex;
+  width: 340px;
 }
 .hire {
   color: #1d9bf0;
@@ -61,6 +63,7 @@
 @media screen and (max-width: 480px) {
   .cardContainer {
     width: 100%;
+
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -69,9 +72,10 @@
   .cards {
     margin-top: 160px;
     width: 258px;
+
     height: 174px;
     left: calc(37% - 238px / 2 - 256px);
-    top: 220px;
+    /* top: 220px; */
 
     border-radius: 10px;
   }

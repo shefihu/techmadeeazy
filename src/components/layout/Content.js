@@ -4,11 +4,11 @@ import TopDev from "../TopDev";
 
 const Content = () => {
   return (
-    <div>
-      <div className="content-box">
-        <div className="hireTop">
-          <h1 className="">Hire Top Developers</h1>
-        </div>
+    <div className="content-box">
+      <div className="hireTop">
+        <h1 className="">Hire Top Developers</h1>
+      </div>
+      <div>
         <TopDev />
       </div>
     </div>
