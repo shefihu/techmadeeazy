@@ -75,7 +75,9 @@ const TopDev = () => {
     }
   };
 
-  const Favourites = JSON.parse(Cookies.get("favourites"));
+  const Favourites = Cookies.get("favourites")
+    ? JSON.parse(Cookies.get("favourites"))
+    : [];
 
   return (
     <div>
@@ -266,7 +268,6 @@ const TopDev = () => {
                                 curr.name,
                                 curr.flag_url,
                                 curr.symbol
-                                // curr.net_conversions.net_rate
                               );
                               setDropdown(false);
                             }}

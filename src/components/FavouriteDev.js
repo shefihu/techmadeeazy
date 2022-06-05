@@ -27,11 +27,10 @@ const FavouriteDev = () => {
   useEffect(() => {
     setFavorites(favourites);
   }, [favourites]);
-  // console.log(currencyLists);
-  // const { loading2, currency, error2 } = devLists;
+
   const [dropdown, setDropdown] = useState(false);
   const [openDropdow, setOpendropdow] = useState(false);
-  // console.log(devLists);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listofdev(setDevs));
@@ -49,7 +48,7 @@ const FavouriteDev = () => {
   };
   const setThe = (id, name, flag_url, symbol) => {
     const rate = netcurrenc.filter(
-      (cd) => id == cd.buying_currency_id && cd.currency_id == 1
+      (cd) => id === cd.buying_currency_id && cd.currency_id === 1
     );
 
     setActiveCurrency({
@@ -60,7 +59,11 @@ const FavouriteDev = () => {
       rate: rate[0].net_rate,
     });
   };
-  const Favourites = JSON.parse(Cookies.get("favourites"));
+
+  const Favourites = Cookies.get("favourites")
+    ? JSON.parse(Cookies.get("favourites"))
+    : [];
+
   return (
     <div>
       {" "}
