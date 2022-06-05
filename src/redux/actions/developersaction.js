@@ -16,7 +16,6 @@ export const listofdev = (setDevs) => async (dispatch) => {
     dispatch({ type: DEV_LIST_SUCCESS, payload: data });
     const _developers = data.data.service_search_results.hits;
     setDevs(_developers);
-    console.log(_developers);
   } catch (error) {
     dispatch({ type: DEV_LIST_FAILURE, payload: error.message });
   }

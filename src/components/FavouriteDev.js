@@ -60,9 +60,7 @@ const FavouriteDev = () => {
       rate: rate[0].net_rate,
     });
   };
-
-  // setFavorites(darl);
-  // console.log(favorites);
+  const Favourites = JSON.parse(Cookies.get("favourites"));
   return (
     <div>
       {" "}
@@ -80,11 +78,10 @@ const FavouriteDev = () => {
                 </>
               ) : (
                 <>
-                  {" "}
                   {favorites.map((dev) => {
                     return (
                       <>
-                        <div className="favcards">
+                        <div className="favcards" key={dev.id}>
                           <img
                             src={dev.photo}
                             alt=""
@@ -96,6 +93,48 @@ const FavouriteDev = () => {
                               borderRadius: "20px",
                             }}
                           />
+                          <div className="big">
+                            {Favourites.find(
+                              (heart) => heart.id === dev._id
+                            ) === undefined ? (
+                              <>
+                                {" "}
+                                <div className="colored">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="19"
+                                    height="19"
+                                    fill="currentColor"
+                                    className="bi bi-heart-fill"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                    />
+                                  </svg>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="notcolored">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="19"
+                                    height="19"
+                                    fill="currentColor"
+                                    className="bi bi-heart-fill"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                                    />
+                                  </svg>
+                                </div>
+                              </>
+                            )}
+                          </div>
                           <img
                             src={dev.avatar}
                             alt=""
@@ -221,7 +260,7 @@ const FavouriteDev = () => {
                     </div>
                   </div>
                 </>
-              )}{" "}
+              )}
             </>
           )}
         </div>

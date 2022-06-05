@@ -1,6 +1,4 @@
 .cards {
-  /* background-color: green; */
-  /* position: absolute; */
   width: 338px;
   height: 304px;
   left: calc(37% - 238px / 2 - 256px);
@@ -17,9 +15,18 @@
   padding-left: 29px;
   justify-content: space-between;
 }
+.cardInfo {
+  justify-content: space-between;
+  display: flex;
+}
+.hire {
+  color: #1d9bf0;
+  font-weight: bolder;
+  margin-top: 30px;
+}
 @media screen and (max-width: 1700px) {
   .cardContainer {
-    /* background-color: navy; */
+    background-color: navy;
     width: 80vw;
     height: 100%;
     display: flex;
@@ -27,10 +34,17 @@
     padding-left: 29px;
     justify-content: space-between;
   }
+  .big {
+    background-color: red;
+
+    height: 50px;
+    position: absolute;
+    margin-left: 17rem;
+  }
 }
 @media screen and (max-width: 870px) {
   .cardContainer {
-    /* background-color: black; */
+    background-color: black;
     width: 100%;
     height: 100%;
     display: flex;
@@ -40,7 +54,7 @@
 }
 @media screen and (max-width: 680px) {
   .cardContainer {
-    /* background-color: blue; */
+    background-color: blue;
     width: 100%;
     height: 100%;
     display: flex;
@@ -51,7 +65,6 @@
 
 @media screen and (max-width: 480px) {
   .cardContainer {
-    /* background-color: burlywood; */
     width: 100%;
     height: 100%;
     display: flex;
@@ -59,31 +72,66 @@
     justify-content: space-between;
   }
   .cards {
-    /* background-color: green; */
-    /* position: absolute; */
     margin-top: 160px;
     width: 258px;
     height: 174px;
     left: calc(37% - 238px / 2 - 256px);
     top: 220px;
 
-    /* background: #4f4f4f; */
     border-radius: 10px;
+  }
+  .big {
+    background-color: red;
+
+    height: 50px;
+    position: absolute;
+    margin-left: 17rem;
   }
   .foot {
     display: flex;
     justify-content: space-between;
-    /* background-color: black; */
+
     width: 400px;
     height: 100px;
     margin-top: 130px;
+  }
+  .notcolored {
+    background-color: red;
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 40px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+  }
+
+  .colored {
+    background-color: white;
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 40px;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+    cursor: pointer;
+  }
+  .colored:hover {
+    background-color: white;
+    fill: red;
+  }
+  .colored svg {
+    fill: red;
   }
 }
 .foot {
   display: flex;
   justify-content: space-between;
-  /* background-color: red; */
-  /* width: 600px; */
   height: 100px;
   margin-top: 130px;
 }
@@ -161,8 +209,6 @@
 .dropdown2 {
   margin-right: 10px;
 }
-.flagname3 {
-}
 
 .flagimg3 {
   margin-left: 10px;
@@ -174,6 +220,36 @@
 .dropdown3 {
   margin-right: 10px;
 }
-/* .flagname3 {
-  margin-right: 120px;
-} */
+.notcolored {
+  background-color: #bbbbbb;
+  margin-left: 15%;
+  margin-top: 10px;
+  width: 40px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+}
+.notcolored svg {
+  fill: white;
+}
+
+.colored {
+  background-color: white;
+  margin-left: 15%;
+  margin-top: 10px;
+  width: 40px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.colored svg {
+  fill: red;
+}

@@ -1,26 +1,15 @@
 .loader {
-  /* height: 50px; */
   animation: rotate 3s linear infinite;
-  /* transform-origin: bottom center; */
 }
 .circle {
   border: 2px dotted rgb(0, 0, 0);
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  /* transform: scale(0); */
-  /* animation: grow 1.5s linear infinite; */
 }
-/* .circle:nth-child(2) {
-  background-color: rgb(3, 184, 255);
-} */
+
 @keyframes rotate {
   to {
     transform: rotate(360deg);
   }
 }
-/* @keyframes grow {
-  50% {
-    transform: scale(1);
-  }
-} */

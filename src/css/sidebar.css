@@ -1,6 +1,6 @@
 .sidebar {
   margin: 10px 10px 10px 10px;
-  /* background-color: red; */
+
   max-width: 250px;
   border-right: 1px solid #d9dbe9;
   height: 220vh;
@@ -25,13 +25,9 @@ li {
   padding-top: 4px;
 }
 .search-home a.active svg {
-  /* background-color: #1d9bf0; */
   height: 100%;
-  /* padding: 6px 6px 6px 6px; */
-  border-radius: 4px;
-  /* margin-top: 4px; */
 
-  /* color: white; */
+  border-radius: 4px;
 }
 
 .favourites a {
@@ -41,7 +37,6 @@ li {
   justify-content: space-between;
   margin-top: 20px;
   color: #b4b5bd;
-  /* background-color: red; */
 }
 .favourites:hover {
   color: #7c7e8a;
@@ -50,56 +45,42 @@ li {
   padding-top: 4px;
 }
 .favourites a.active svg {
-  /* background-color: #1d9bf0; */
   height: 100%;
-  /* padding: 6px 6px 6px 6px; */
   border-radius: 4px;
-  /* margin-top: 4px; */
-
-  /* color: white; */
 }
 .sideNav {
   max-width: 300px;
-  /* width: 600px; */
-  /* background-color: aqua; */
   height: 100px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  /* justify-content: space-between; */
   justify-content: center;
   padding: 20px 20px 20px 40px;
   padding: 15px 0 0px 0px;
-
-  /* border-right: 1px solid #d9dbe9; */
 }
 @media screen and (max-width: 400px) {
   .sidebar {
     margin: 10px 10px 10px 10px;
-    /* background-color: red; */
     width: 250px;
     border-right: 1px solid #d9dbe9;
     height: 650vh;
-    /* background-color: #1d9bf0; */
   }
 }
 @media screen and (max-width: 820px) {
   .sidebar {
     margin: 10px 10px 10px 10px;
-    /* background-color: red; */
+
     width: 350px;
     border-right: 1px solid #d9dbe9;
-    /* background-color: #1d9bf0; */
     height: 650vh;
   }
 }
 @media screen and (max-width: 1700px) {
   .sidebar {
     margin: 10px 10px 10px 10px;
-    /* background-color: red; */
+
     width: 350px;
     border-right: 1px solid #d9dbe9;
-    /* background-color: #1d9bf0; */
     height: 650vh;
   }
 }
@@ -121,8 +102,3 @@ a {
   color: #7c7e8a;
   text-decoration: none;
 }
-/* .crumb {
-  background-color: #1d9bf0;
-  width: 40px;
-  height: 40px;
-} */

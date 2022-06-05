@@ -1,15 +1,8 @@
-import axios from "axios";
-// import FAV_ADD_ITEM from "../constants/favConstants";
 import Cookies from "js-cookie";
 import { FAV_ADD_ITEM } from "../constants/favConstants";
 export const addToFav =
   (_id, display_name, service_photo, avatar, starting_from) =>
   async (dispatch, getState) => {
-    // const { data } = await axios
-    //   .get
-    //     `https://n-p-g.herokuapp.com/v1/product/getOneProduct/${id}`
-    //   ();
-
     dispatch({
       type: FAV_ADD_ITEM,
       payload: {
@@ -21,6 +14,4 @@ export const addToFav =
       },
     });
     Cookies.set("favourites", JSON.stringify(getState().favLists.favItems));
-    console.log("jjjj", getState());
-    // console.log(JSON.parse(Cookies.get("favourites")));
   };

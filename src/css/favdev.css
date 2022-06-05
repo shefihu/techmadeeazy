@@ -1,6 +1,4 @@
 .favcards {
-  /* background-color: green; */
-  /* position: absolute; */
   width: 338px;
   height: 304px;
   left: calc(37% - 238px / 2 - 256px);
@@ -11,7 +9,6 @@
   margin-top: 30px;
 }
 .favcardContainer {
-  /* background-color: rebeccapurple; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -32,7 +29,6 @@
 }
 @media screen and (max-width: 870px) {
   .favcardContainer {
-    /* background-color: black; */
     width: 100vw;
     height: 100%;
     display: flex;
@@ -42,7 +38,6 @@
 }
 @media screen and (max-width: 680px) {
   .favcardContainer {
-    /* background-color: blue; */
     width: 100vw;
     height: 100%;
     display: flex;
@@ -53,7 +48,6 @@
 
 @media screen and (max-width: 480px) {
   .favcardContainer {
-    /* background-color: burlywood; */
     width: 100%;
     height: 100%;
     display: flex;
@@ -61,22 +55,17 @@
     justify-content: space-between;
   }
   .favcards {
-    /* background-color: green; */
-    /* position: absolute; */
     margin-top: 160px;
     width: 258px;
     height: 174px;
     left: calc(37% - 238px / 2 - 256px);
     top: 220px;
-
-    /* background: #4f4f4f; */
     border-radius: 10px;
   }
 }
 .favfoot {
   display: flex;
   justify-content: space-between;
-  /* background-color: red; */
   height: 100px;
   width: 100%;
   margin-top: 130px;
@@ -115,18 +104,14 @@
   border: 1px solid gray;
   align-items: center;
   justify-content: space-between;
-  /* position: absolute; */
 }
 .favselectbar3 {
   width: 250px;
   height: 40px;
-  /* background-color: green; */
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  /* position: absolute; */
 }
 .favselectbar3:hover {
   background-color: rgb(214, 209, 209);
@@ -156,8 +141,6 @@
 .favdropdown2 {
   margin-right: 10px;
 }
-.favflagname3 {
-}
 
 .favflagimg3 {
   margin-left: 10px;
@@ -169,6 +152,3 @@
 .favdropdown3 {
   margin-right: 10px;
 }
-/* .flagname3 {
-  margin-right: 120px;
-} */
