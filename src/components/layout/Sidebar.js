@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import logo from "./../../assets/images/Logo.png";
 import "../../css/sidebar.css";
-import { CSSTransition } from "react-transition-group";
-import { Link, NavLink } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(true);
+
   return (
     <div>
-      {/* <CSSTransition in={show} timeout={400} classNames="display" unmountOnExit> */}
       <button
         onClick={() => {
           setShow(true);
@@ -25,16 +24,16 @@ const Sidebar = () => {
           width="26"
           height="26"
           fill="currentColor"
-          class="bi bi-justify-left"
+          className="bi bi-justify-left"
           viewBox="0 0 16 16"
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
           />
         </svg>
       </button>
-      {/* </CSSTransition> */}
+
       {show && (
         <>
           <button
@@ -53,11 +52,11 @@ const Sidebar = () => {
               width="26"
               height="26"
               fill="currentColor"
-              class="bi bi-justify-left"
+              className="bi bi-justify-left"
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
               />
             </svg>

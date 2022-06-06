@@ -1,4 +1,4 @@
-import { FAV_ADD_ITEM } from "../constants/favConstants";
+import { FAV_ADD_ITEM, FAV_REMOVE_ITEM } from "../constants/favConstants";
 
 export const favouriteReducer = (state = { favItems: [] }, action) => {
   switch (action.type) {
@@ -16,6 +16,12 @@ export const favouriteReducer = (state = { favItems: [] }, action) => {
       } else {
         return { ...state, favItems: [...state.favItems, item] };
       }
+    }
+    case FAV_REMOVE_ITEM: {
+      return {
+        ...state,
+        favItems: state.favItems.filter((x) => x.id !== action.payload),
+      };
     }
     default:
       return state;

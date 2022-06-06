@@ -49,7 +49,7 @@ const TopDev = () => {
   };
 
   const navigate = useNavigate();
-
+  //currency handler
   const setThe = (id, name, flag_url, symbol) => {
     const rate = netcurrenc.filter(
       (cd) => id === cd.buying_currency_id && cd.currency_id === 1

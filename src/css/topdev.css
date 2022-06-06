@@ -226,7 +226,7 @@
   height: 40px;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 12px;
   position: absolute;
 }
 .notcolored svg {
@@ -242,7 +242,7 @@
   height: 40px;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 12px;
   position: absolute;
   cursor: pointer;
 }

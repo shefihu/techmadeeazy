@@ -5,6 +5,9 @@ import { listofdev } from "../redux/actions/developersaction";
 import Cookies from "js-cookie";
 import Loader from "./Loader";
 import "../css/favdev.css";
+import { removeFromFavorites } from "../redux/actions/addFav";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 const FavouriteDev = () => {
   const [devs, setDevs] = useState([]);
   const [currenc, setCurrency] = useState([]);
@@ -18,10 +21,8 @@ const FavouriteDev = () => {
     rate: 1,
   });
   const devLists = useSelector((state) => state.devLists);
-  const { loading, developers, error } = devLists;
-  // const darl = JSON.parse(Cookies.get("favourites"));
+  const { loading } = devLists;
 
-  const currencyLists = useSelector((state) => state.currencyLists);
   const favourites = useSelector((state) => state.favLists.favItems);
 
   useEffect(() => {
@@ -32,25 +33,28 @@ const FavouriteDev = () => {
   const [openDropdow, setOpendropdow] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(listofdev(setDevs));
   }, [dispatch]);
   useEffect(() => {
     dispatch(listofcurrency(setCurrency, setnetCurrency));
   }, [dispatch]);
+  //open drop down
   const openDropdown = () => {
     setDropdown(true);
     setOpendropdow(true);
   };
+  //close dropdown
   const closeDropdown = () => {
     setDropdown(false);
     setOpendropdow(false);
   };
+  //currency handler
   const setThe = (id, name, flag_url, symbol) => {
     const rate = netcurrenc.filter(
       (cd) => id === cd.buying_currency_id && cd.currency_id === 1
     );
-
     setActiveCurrency({
       id: id,
       name: name,
@@ -59,14 +63,20 @@ const FavouriteDev = () => {
       rate: rate[0].net_rate,
     });
   };
-
+  const removeFromFavourites = (id) => {
+    if (Favourites.find((heart) => heart.id === id)) {
+      toast.success("Removed from favorites");
+    }
+    dispatch(removeFromFavorites(id));
+    navigate("/favorites");
+  };
+  //getting favorites from cookie
   const Favourites = Cookies.get("favourites")
     ? JSON.parse(Cookies.get("favourites"))
     : [];
-
   return (
     <div>
-      {" "}
+      <ToastContainer />
       <section className="favcontainerController">
         <div className="favcardContainer">
           {loading ? (
@@ -96,13 +106,23 @@ const FavouriteDev = () => {
                               borderRadius: "20px",
                             }}
                           />
-                          <div className="big">
-                            {Favourites.find(
-                              (heart) => heart.id === dev._id
-                            ) === undefined ? (
+                          <div
+                            className="big"
+                            onClick={() => {
+                              removeFromFavourites(
+                                dev.id
+                                // dev.name,
+                                // dev.photo,
+                                // dev.avatar,
+                                // dev.starting
+                              );
+                            }}
+                          >
+                            {Favourites.find((heart) => heart.id === dev.id) ===
+                            undefined ? (
                               <>
                                 {" "}
-                                <div className="colored">
+                                <div className="notcolored">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="19"
@@ -120,7 +140,7 @@ const FavouriteDev = () => {
                               </>
                             ) : (
                               <>
-                                <div className="notcolored">
+                                <div className="colored">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="19"
@@ -155,7 +175,7 @@ const FavouriteDev = () => {
                             <p>{dev.name}</p>
                             <p>
                               {activecurrenc.symbol}
-                              {/* {activecurrenc.symbol} */}
+
                               {(
                                 parseInt(dev.starting) * activecurrenc.rate
                               ).toFixed(2)}
