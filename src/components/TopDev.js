@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
@@ -32,11 +31,9 @@ const TopDev = () => {
 
   useEffect(() => {
     dispatch(listofdev(setDevs));
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(listofcurrency(setCurrency, setnetCurrency));
   }, [dispatch]);
+
   //opening dropdown
   const openDropdown = () => {
     setDropdown(true);
@@ -63,6 +60,7 @@ const TopDev = () => {
       rate: rate[0].net_rate,
     });
   };
+  //adding of favorites
   const addFav = (_id, display_name, service_photo, avatar, starting_from) => {
     if (Favourites.find((heart) => heart.id === _id)) {
       toast.error("Already in Favourites");
@@ -190,7 +188,7 @@ const TopDev = () => {
                             ).toFixed(2)}
                           </p>
                         </div>
-                        <p className="hire">Hire Now</p>
+                        <p className="hire">Hire</p>
                       </div>
                     </div>
                   </>
